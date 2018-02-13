@@ -27,7 +27,7 @@ class Head extends Component {
     const {classes} = this.props;
 
     return (
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.props.showDrawer}>
             <MenuIcon/>
