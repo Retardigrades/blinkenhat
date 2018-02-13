@@ -40,6 +40,7 @@ class Main extends Component {
     this.state = {
       drawer: true,
       view: 0,
+      debouncing: false,
       global_data: {
         sta_ssid: "",
         sta_passwd: "",
@@ -76,6 +77,13 @@ class Main extends Component {
   }
 
   saveConfig() {
+    if (this.state.debouncing) {
+      return;
+    }
+
+    window.setTimeout(() => this.setState({debouncing: false}), 1500);
+    this.setState({debouncing: true});
+
     axios.post('/config', this.state.global_data)
       .then(rsp => {
         this.showMessage("Config saved");
