@@ -26,6 +26,9 @@ const styles = theme => ({
 });
 
 
+const applyText = ["none", "upper", "lower", "both"];
+
+
 function createDefault(effect, fxList) {
   const new_idx = (fxList.length === 0 ? 0 :
     Math.max.apply(null, fxList.map((v, i) => v.idx)) + 1);
@@ -65,7 +68,7 @@ function DotCfg(props) {
                     valueFormat={val => val}/>
       <SimpleSlider id="speed" label="Speed of dots" min={600} max={6000} step={200} value={props.cfg.speed}
                     onChange={props.updater("speed")}
-                    valueFormat={val => val}/>
+                    valueFormat={val => val / 1000.0 + "sek"}/>
       <SimpleSlider id="len" label="Length of tail" min={1} max={15} step={1} value={props.cfg.len}
                     onChange={props.updater("len")}
                     valueFormat={val => val}/>
@@ -75,13 +78,13 @@ function DotCfg(props) {
       <SimpleSlider id="color_speed" label="Speed of color change" min={600} max={6000} step={200}
                     value={props.cfg.color_speed}
                     onChange={props.updater("color_speed")}
-                    valueFormat={val => val}/>
+                    valueFormat={val => val / 1000.0 + "sek"}/>
       <SimpleSlider id="apply" label="Apply To" min={0} max={3} step={1} value={props.cfg.apply}
                     onChange={props.updater("apply")}
-                    valueFormat={val => val}/>
-      <SimpleSlider id="coeff" label="Coeff" min={0} max={1} step={0.1} value={props.cfg.coeff}
+                    valueFormat={val => applyText[val]}/>
+      <SimpleSlider id="coeff" label="Visibility" min={0.1} max={1} step={0.1} value={props.cfg.coeff}
                     onChange={props.updater("coeff")}
-                    valueFormat={val => val}/>
+                    valueFormat={val => val * 100 + "%"}/>
     </div>
   )
 }
@@ -91,23 +94,22 @@ function RainbowCfg(props) {
     <div>
       <SimpleSlider id="speed" label="Speed" min={600} max={6000} step={200} value={props.cfg.speed}
                     onChange={props.updater("speed")}
-                    valueFormat={val => val}/>
+                    valueFormat={val => val / 1000.0 + "sek"}/>
       <SimpleSlider id="apply" label="Apply to" min={0} max={3} step={1} value={props.cfg.apply}
                     onChange={props.updater("apply")}
-                    valueFormat={val => val}/>
-      <SimpleSlider id="coeff" label="Coeff" min={0.1} max={1} step={0.1} value={props.cfg.coeff}
+                    valueFormat={val => applyText[val]}/>
+      <SimpleSlider id="coeff" label="Visibility" min={0.1} max={1} step={0.1} value={props.cfg.coeff}
                     onChange={props.updater("coeff")}
-                    valueFormat={val => val}/>
+                    valueFormat={val => val * 100 + "%"}/>
     </div>
   )
 }
 
 function Effect(props) {
   return (
-    <PaperContainer headline={"Effect: " + props.effect_data.typ}>
+    <PaperContainer headline={ "Effect: " + props.effect_data.typ} onRemove={props.deleter}>
       {props.effect_data.typ === 'rainbow' && <RainbowCfg updater={props.updater} cfg={props.effect_data.cfg}/>}
       {props.effect_data.typ === 'dot' && <DotCfg updater={props.updater} cfg={props.effect_data.cfg}/>}
-      <Button onClick={props.deleter}>remove</Button>
     </PaperContainer>
   )
 }
@@ -212,7 +214,7 @@ class Channel extends Component {
     return (
       <Page name={"Channel " + this.props.channel + " Settings"}>
         <PaperContainer headline="General channel settings">
-          <SimpleSlider id="leds" label="Number of LED" min={30} max={100} value={channel_data.leds}
+          <SimpleSlider id="leds" label="Number of LED" min={1} max={100} value={channel_data.leds}
                         onChange={this.changeData("leds")}
                         valueFormat={val => val + " LEDs"}/>
           <SimpleSlider id="gamma" label="Gamma Value" min={0.5} max={2} step={0.1} value={channel_data.gamma}
