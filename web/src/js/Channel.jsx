@@ -214,7 +214,7 @@ class Channel extends Component {
     return (
       <Page name={"Channel " + this.props.channel + " Settings"}>
         <PaperContainer headline="General channel settings">
-          <SimpleSlider id="leds" label="Number of LED" min={1} max={100} value={channel_data.leds}
+          <SimpleSlider id="leds" label="Number of LED" min={2} max={100} value={channel_data.leds}
                         onChange={this.changeData("leds")}
                         valueFormat={val => val + " LEDs"}/>
           <SimpleSlider id="gamma" label="Gamma Value" min={0.5} max={2} step={0.1} value={channel_data.gamma}
