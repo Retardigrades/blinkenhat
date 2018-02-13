@@ -10,6 +10,7 @@ const styles = theme => ({
     padding: 5
   },
   headline: {
+    marginTop: 50,
     padding: theme.spacing.unit,
     paddingTop: theme.spacing.unit * 2,
   }
