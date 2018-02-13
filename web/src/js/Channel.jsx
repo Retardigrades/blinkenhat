@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import Button from 'material-ui/Button';
 import Divider from 'material-ui/Divider';
 import AddIcon from 'material-ui-icons/Add';
-import Popover from 'material-ui/Popover';
 import Menu, {MenuItem} from 'material-ui/Menu';
 
 
@@ -26,6 +25,37 @@ const styles = theme => ({
   }
 });
 
+
+function createDefault(effect, fxList) {
+  const new_idx = (fxList.length === 0 ? 0 :
+    Math.max.apply(null, fxList.map((v, i) => v.idx)) + 1);
+  if (effect === "rainbow") {
+    return {
+      typ: "rainbow",
+      idx: new_idx,
+      cfg: {
+        speed: 5000,
+        apply: 1,
+        coeff: 1.0
+      }
+    };
+  }
+  if (effect === "dot") {
+    return {
+      typ: "dot",
+      idx: new_idx,
+      cfg: {
+        count: 3,
+        speed: 6000,
+        len: 10,
+        hue: 0,
+        color_speed: 4000,
+        apply: 2,
+        coeff: 1.0
+      }
+    };
+  }
+}
 
 function DotCfg(props) {
   return (
@@ -77,7 +107,7 @@ function Effect(props) {
     <PaperContainer headline={"Effect: " + props.effect_data.typ}>
       {props.effect_data.typ === 'rainbow' && <RainbowCfg updater={props.updater} cfg={props.effect_data.cfg}/>}
       {props.effect_data.typ === 'dot' && <DotCfg updater={props.updater} cfg={props.effect_data.cfg}/>}
-      <Button>remove</Button>
+      <Button onClick={props.deleter}>remove</Button>
     </PaperContainer>
   )
 }
@@ -98,6 +128,11 @@ class AddMenu extends Component {
     this.setState({anchorEl: null});
   };
 
+  handleAdd(name) {
+    this.props.onAdd(name);
+    this.handleClose();
+  }
+
   render() {
     const {anchorEl} = this.state;
 
@@ -117,8 +152,8 @@ class AddMenu extends Component {
           open={Boolean(anchorEl)}
           onClose={() => this.handleClose()}
         >
-          <MenuItem onClick={() => this.handleClose()}>Dot</MenuItem>
-          <MenuItem onClick={() => this.handleClose()}>Rainbow</MenuItem>
+          <MenuItem onClick={() => this.handleAdd("dot")}>Dot</MenuItem>
+          <MenuItem onClick={() => this.handleAdd("rainbow")}>Rainbow</MenuItem>
         </Menu>
       </div>
     );
@@ -139,10 +174,36 @@ class Channel extends Component {
   updateEffectData(id, field) {
     return event => {
       this.props.dataMangle(d => {
-        d.effects[id].cfg[field] = parseFloat(event.target.value);
+        const idx = d.effects.findIndex(v => v.idx === id);
+        if (idx !== -1) {
+          d.effects[idx].cfg[field] = parseFloat(event.target.value);
+        }
       });
     }
   }
+
+  deleteEffect(id) {
+    return event => {
+      this.props.dataMangle(d => {
+        const idx = d.effects.findIndex(v => v.idx === id);
+        if (idx !== -1) {
+          d.effects.splice(idx, 1);
+        }
+      });
+    }
+  }
+
+  addEffect() {
+    return name => {
+      this.props.dataMangle(d => {
+        const newItem = createDefault(name, d.effects);
+        if (newItem !== undefined) {
+          d.effects.push(newItem);
+        }
+      });
+    }
+  }
+
 
   render() {
     const {classes, cfg_data} = this.props;
@@ -159,10 +220,12 @@ class Channel extends Component {
                         valueFormat={val => val}/>
         </PaperContainer>
         <Divider className={classes.divider}/>
-        <AddMenu/>
+        <AddMenu onAdd={this.addEffect()}/>
 
         {channel_data.effects.map((fx, idx) => (
-          <Effect effect_data={fx} key={fx.idx} updater={field => this.updateEffectData(idx, field)}/>
+          <Effect effect_data={fx} key={fx.idx}
+                  updater={field => this.updateEffectData(fx.idx, field)}
+                  deleter={this.deleteEffect(fx.idx)}/>
         ))}
       </Page>
     );
