@@ -139,7 +139,10 @@ class Channel extends Component {
   updateEffectData(id, field) {
     return event => {
       this.props.dataMangle(d => {
-        d.effects[id].cfg[field] = parseFloat(event.target.value);
+        const idx = d.effects.findIndex(v => v.idx === id);
+        if (idx !== -1) {
+          d.effects[idx].cfg[field] = parseFloat(event.target.value);
+        }
       });
     }
   }
@@ -162,7 +165,7 @@ class Channel extends Component {
         <AddMenu/>
 
         {channel_data.effects.map((fx, idx) => (
-          <Effect effect_data={fx} key={fx.idx} updater={field => this.updateEffectData(idx, field)}/>
+          <Effect effect_data={fx} key={fx.idx} updater={field => this.updateEffectData(fx.idx, field)}/>
         ))}
       </Page>
     );
