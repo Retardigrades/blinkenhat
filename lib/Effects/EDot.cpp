@@ -27,16 +27,16 @@ void EDot::update(LEDBand &band, unsigned long time) {
                          ? 1.0f - center_distance
                          : 1.0f - fminf(1.0f, center_distance/float(width)));
     unsigned int actual_hue = (pos==head ? hue : hue - uint8_t(hue_coeff*center_distance));
-    uint8_t brightness = uint8_t(255*local_coeff*local_coeff);
+    uint8_t brightness = uint8_t((255.0f*coeff) * local_coeff*local_coeff);
     for (int i = 0; i < count; ++i) {
       unsigned int actual_off = dot_offset*i;
       CHSV color(uint8_t((actual_hue + uint8_t(float(actual_off)*hue_coeff))%255),
                  255, brightness);
       unsigned int idx = (pos + actual_off)%max;
       if (apply_to & 0x01)
-        band.upperLeds()[idx] += (color*coeff);
+        band.upperLeds()[idx] += (color);
       if (apply_to & 0x02)
-        band.lowerLeds()[idx] += (color*coeff);
+        band.lowerLeds()[idx] += (color);
     }
   } while (pos!=head);
 }
