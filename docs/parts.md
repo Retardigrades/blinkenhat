@@ -5,7 +5,7 @@ title: Part list
 # Part List
 
 This is the list of components that we used for the first iteration of the workshop.
-There might be beter and/pr cheaper options to get the parts.
+There might be better and/or cheaper options to get the parts.
 
 |  **Nr** | **Position** | **Qty** | **Price/piece** | **Sum** | **Seller-Link** |
 |  ------ | ------ | ------ | ------ | ------ | ------ |
