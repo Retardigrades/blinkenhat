@@ -3,7 +3,7 @@
 ## Introduction
 
 The blinkenhat is a little project to enable interrested people with little or less experience in electronics or programming into this field.
-It was founded to hold a workshop where peopl can build a blinking hat.
+It was founded to hold a workshop where people can build a blinking hat.
 The main parts are:
 1. A little PCB with a microcontroller
 2. The Software running on the microcontroller
