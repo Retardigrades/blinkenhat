@@ -156,6 +156,7 @@ function Effect(props) {
     <PaperContainer headline={ "Effect: " + props.effect_data.typ} onRemove={props.deleter}>
       {props.effect_data.typ === 'rainbow' && <RainbowCfg updater={props.updater} cfg={props.effect_data.cfg}/>}
       {props.effect_data.typ === 'dot' && <DotCfg updater={props.updater} cfg={props.effect_data.cfg}/>}
+      {props.effect_data.typ === 'twinkle' && <TwinkleCfg updater={props.updater} cfg={props.effect_data.cfg}/>}
     </PaperContainer>
   )
 }
