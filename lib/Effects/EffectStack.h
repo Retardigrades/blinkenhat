@@ -5,8 +5,8 @@
 #ifndef BLINKENHAT_EFFECTSTACK_H
 #define BLINKENHAT_EFFECTSTACK_H
 
-#include <forward_list>
 #include <LEDBand.h>
+#include <forward_list>
 
 #include "Effect.h"
 
@@ -26,4 +26,4 @@ private:
   std::forward_list<Effect *> effects;
 };
 
-#endif //BLINKENHAT_EFFECTSTACK_H
+#endif // BLINKENHAT_EFFECTSTACK_H

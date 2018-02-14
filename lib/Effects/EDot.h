@@ -3,12 +3,12 @@
 
 class EDot : public Effect {
 public:
-  EDot() : width(0), count(1), start_hue(0), apply_to(3), coeff(1.0f), start_time(0), duration(0) {}
+  EDot()
+      : width(0), count(1), start_hue(0), apply_to(3), coeff(1.0f),
+        start_time(0), duration(0) {}
 
   void update(LEDBand &band, unsigned long time) override;
-  void restart() override {
-    start_time = millis();
-  }
+  void restart() override { start_time = millis(); }
   void config(const ConfigWrapper &cfg) override;
 
 private:

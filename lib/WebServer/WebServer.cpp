@@ -9,7 +9,6 @@
 #define X_QUOTE(x) #x
 #define QUOTE(x) X_QUOTE(x)
 
-
 const char PROGMEM TEXT_PLAIN[] = "text/plain";
 const char PROGMEM APPLICATION_JSON[] = "application/json";
 
@@ -23,17 +22,18 @@ void WebServer::configure(HatConfig &config) {
    * GET /
    */
   web.on(F("/"), HTTP_GET, [this]() {
-      web.sendHeader(F("Content-Encoding"), F("deflate"));
-      web.setContentLength(index_html_len);
-      web.send(200, F("text/html"), "");
-      web.sendContent_P(index_html, index_html_len);
-   });
+    web.sendHeader(F("Content-Encoding"), F("deflate"));
+    web.setContentLength(index_html_len);
+    web.send(200, F("text/html"), "");
+    web.sendContent_P(index_html, index_html_len);
+  });
 
   /*
    * GET /firmware
    */
   web.on(F("/firmware"), HTTP_GET, [this]() {
-    web.send(200, FPSTR(APPLICATION_JSON), F("{\"version\": \"" QUOTE(FW_VERSION) "\"}"));
+    web.send(200, FPSTR(APPLICATION_JSON),
+             F("{\"version\": \"" QUOTE(FW_VERSION) "\"}"));
   });
 
   /*
@@ -51,8 +51,8 @@ void WebServer::configure(HatConfig &config) {
         } else {
           web.sendHeader(F("Refresh"), F("20; URL=/"));
           web.send_P(200, TEXT_PLAIN,
-                        PSTR("Update successful.\n\nDevice will reboot and try "
-                             "to reconnect in 20 seconds."));
+                     PSTR("Update successful.\n\nDevice will reboot and try "
+                          "to reconnect in 20 seconds."));
         }
         delay(1000);
         WiFi.disconnect(true);

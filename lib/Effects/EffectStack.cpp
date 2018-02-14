@@ -4,22 +4,22 @@
 
 #include "EffectStack.h"
 
-#include "ERainbow.h"
 #include "EDot.h"
+#include "ERainbow.h"
 #include "ETwinkle.h"
 
 Effect *EffectStack::createEffect(const HatConfig::EffectCfg &cfg) {
-  if (cfg.type()==F("rainbow")) {
+  if (cfg.type() == F("rainbow")) {
     Effect *fx = new ERainbow();
     fx->config(cfg.config());
     return fx;
   }
-  if (cfg.type()==F("dot")) {
+  if (cfg.type() == F("dot")) {
     Effect *fx = new EDot();
     fx->config(cfg.config());
     return fx;
   }
-  if (cfg.type()==F("twinkle")) {
+  if (cfg.type() == F("twinkle")) {
     Effect *fx = new ETwinkle();
     fx->config(cfg.config());
     return fx;

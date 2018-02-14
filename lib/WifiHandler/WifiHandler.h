@@ -2,8 +2,8 @@
 #define BLINKENHAT_WIFIHANDLER_H
 #include <ESP8266WiFi.h>
 
-#include <HatConfig.h>
 #include <DNSServer.h>
+#include <HatConfig.h>
 
 class WifiHandler {
 public:
@@ -12,7 +12,7 @@ public:
 
   bool isConnected() { return (WiFi.softAPgetStationNum() > 0); }
   void loop() {
-    //Serial.printf("Stations connected = %d\n", WiFi.softAPgetStationNum());
+    // Serial.printf("Stations connected = %d\n", WiFi.softAPgetStationNum());
     dnsServer.processNextRequest();
     // .. disconnect after timeout
     // use softAPgetStationNum to check if clients connected.

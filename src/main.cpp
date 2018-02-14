@@ -2,15 +2,13 @@
 
 #include <HatConfig.h>
 #include <LEDDevice.h>
-#include <WifiHandler.h>
 #include <WebServer.h>
-
+#include <WifiHandler.h>
 
 HatConfig cfg;
 WifiHandler wifihandler;
 LEDDevice device;
 WebServer web;
-
 
 void setup() {
   Serial.begin(115200);
@@ -27,14 +25,14 @@ void setup() {
 
   web.configure(cfg);
 
-  cfg.onReconf([&](const HatConfig& new_cfg){ device.configure(new_cfg); });
+  cfg.onReconf([&](const HatConfig &new_cfg) { device.configure(new_cfg); });
   Serial.println(ESP.getChipId(), HEX);
 }
 
 void loop() {
   unsigned long loop_time = millis();
-  //if (!wifihandler.isConnected()) {
-    device.loop(loop_time);
+  // if (!wifihandler.isConnected()) {
+  device.loop(loop_time);
   //}
   wifihandler.loop();
   web.loop();

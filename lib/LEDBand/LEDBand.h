@@ -14,16 +14,15 @@ class LEDBand {
 public:
   LEDBand(const CRGBSet &leds, uint8_t num_leds, float gamma);
 
-
   uint8_t getLEDCount() const { return numLEDs; }
 
   CRGBSet allLeds() { return leds; }
-  CRGBSet upperLeds() { return leds(0, (numLEDs/2) - 1); }
-  CRGBSet lowerLeds() { return CRGBSet(leds.leds, numLEDs - 1, (numLEDs/2)); }
+  CRGBSet upperLeds() { return leds(0, (numLEDs / 2) - 1); }
+  CRGBSet lowerLeds() { return CRGBSet(leds.leds, numLEDs - 1, (numLEDs / 2)); }
 
   void blankLeds() { leds = CRGB::Black; }
   void applyGamma() {
-    if (1.0f!=gamma) {
+    if (1.0f != gamma) {
       allLeds().napplyGamma_video(gamma);
     }
   }
