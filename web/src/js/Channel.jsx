@@ -26,7 +26,7 @@ const styles = theme => ({
 });
 
 
-const applyText = ["none", "upper", "lower", "both"];
+const applyText = ["none", "upper", "lower", "both", "as one strip"];
 
 
 function createDefault(effect, fxList) {
@@ -79,7 +79,7 @@ function DotCfg(props) {
                     value={props.cfg.color_speed}
                     onChange={props.updater("color_speed")}
                     valueFormat={val => val / 1000.0 + "sek"}/>
-      <SimpleSlider id="apply" label="Apply To" min={0} max={3} step={1} value={props.cfg.apply}
+      <SimpleSlider id="apply" label="Apply To" min={0} max={4} step={1} value={props.cfg.apply}
                     onChange={props.updater("apply")}
                     valueFormat={val => applyText[val]}/>
       <SimpleSlider id="coeff" label="Visibility" min={0.1} max={1} step={0.1} value={props.cfg.coeff}
@@ -95,7 +95,7 @@ function RainbowCfg(props) {
       <SimpleSlider id="speed" label="Speed" min={600} max={6000} step={200} value={props.cfg.speed}
                     onChange={props.updater("speed")}
                     valueFormat={val => val / 1000.0 + "sek"}/>
-      <SimpleSlider id="apply" label="Apply to" min={0} max={3} step={1} value={props.cfg.apply}
+      <SimpleSlider id="apply" label="Apply to" min={0} max={4} step={1} value={props.cfg.apply}
                     onChange={props.updater("apply")}
                     valueFormat={val => applyText[val]}/>
       <SimpleSlider id="coeff" label="Visibility" min={0.1} max={1} step={0.1} value={props.cfg.coeff}
