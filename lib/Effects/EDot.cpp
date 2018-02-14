@@ -1,7 +1,7 @@
 #include "EDot.h"
 
 void EDot::update(LEDBand &band, unsigned long time) {
-  int max = band.getLEDCount()/2;
+  int max = band.getLEDCount() / (apply_to == 4 ? 1 : 2);
 
   unsigned int dot_offset = max/count;
   uint8_t hue = start_hue;
@@ -34,9 +34,11 @@ void EDot::update(LEDBand &band, unsigned long time) {
                  255, brightness);
       unsigned int idx = (pos + actual_off)%max;
       if (apply_to & 0x01)
-        band.upperLeds()[idx] += (color);
+        band.upperLeds()[idx] += color;
       if (apply_to & 0x02)
-        band.lowerLeds()[idx] += (color);
+        band.lowerLeds()[idx] += color;
+      if (apply_to == 4)
+        band.allLeds()[idx] += color;
     }
   } while (pos!=head);
 }
