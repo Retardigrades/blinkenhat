@@ -5,7 +5,7 @@
 #include "LEDDevice.h"
 
 static const uint8_t maxLEDs = MAX_LEDS;
-static CRGBArray<maxLEDs*2> led_arr;
+static CRGBArray<maxLEDs * 2> led_arr;
 
 void LEDDevice::setup() {
   // tell FastLED about the LED strip configuration
@@ -16,9 +16,12 @@ void LEDDevice::setup() {
   FastLED.setDither(0);
 }
 
-LEDDevice::LEDDevice() : brightness(50), frame_time(1000/30), last_update(0), bands({nullptr, nullptr}) {}
+LEDDevice::LEDDevice()
+    : brightness(50), frame_time(1000 / 30), last_update(0),
+      bands({nullptr, nullptr}) {}
 
-void LEDDevice::recreateChannel(const Channel &channel, const HatConfig::ChannelCfg &c_cfg) {
+void LEDDevice::recreateChannel(const Channel &channel,
+                                const HatConfig::ChannelCfg &c_cfg) {
   int idx = int(channel);
 
   uint8_t num_leds = c_cfg.getOption("leds", uint8_t(70));
@@ -28,14 +31,16 @@ void LEDDevice::recreateChannel(const Channel &channel, const HatConfig::Channel
     delete bands[idx];
   }
 
-  bands[idx] = new LEDBand(led_arr((idx*maxLEDs), ((idx*maxLEDs) + num_leds - 1)), num_leds, gamma);
+  bands[idx] =
+      new LEDBand(led_arr((idx * maxLEDs), ((idx * maxLEDs) + num_leds - 1)),
+                  num_leds, gamma);
 }
 
 void LEDDevice::configure(const HatConfig &cfg) {
   const ConfigWrapper root(cfg.device());
 
   brightness = root.getOption(F("brightness"), uint8_t(50));
-  frame_time = 1000/root.getOption(F("framerate"), 30U);
+  frame_time = 1000 / root.getOption(F("framerate"), 30U);
 
   // set master brightness control
   FastLED.setBrightness(brightness);
@@ -46,7 +51,6 @@ void LEDDevice::configure(const HatConfig &cfg) {
 
     recreateChannel(channel, ccfg);
   });
-
 }
 
 void LEDDevice::loop(unsigned long time) {

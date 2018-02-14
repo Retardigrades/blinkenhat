@@ -24,11 +24,11 @@ bool WifiHandler::connect() {
     WiFi.mode(WIFI_STA);
     WiFi.begin(sta_ssid.c_str(), sta_passwd.c_str());
 
-    for (int i = 0; i <100; ++i) {
+    for (int i = 0; i < 100; ++i) {
       if (WiFi.status() == WL_CONNECTED) {
-         Serial.printf("connected after %dms\n", i*50);
-	       Serial.println(WiFi.localIP());
-         return true;
+        Serial.printf("connected after %dms\n", i * 50);
+        Serial.println(WiFi.localIP());
+        return true;
       }
       delay(50);
     }
@@ -38,7 +38,7 @@ bool WifiHandler::connect() {
     WiFi.mode(WIFI_AP);
 
     WiFi.softAP((ap_ssid + String(ESP.getChipId(), HEX)).c_str(),
-		ap_passwd.c_str());
+                ap_passwd.c_str());
 
     delay(500);
     Serial.println(WiFi.softAPIP());

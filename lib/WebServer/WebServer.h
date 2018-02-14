@@ -1,9 +1,8 @@
 #ifndef BLINKENHAT_WEBSERVER_H
 #define BLINKENHAT_WEBSERVER_H
 
-#include <HatConfig.h>
 #include <ESP8266WebServer.h>
-
+#include <HatConfig.h>
 
 class WebServer {
 public:
@@ -15,6 +14,5 @@ public:
 private:
   ESP8266WebServer web;
 };
-
 
 #endif // BLINKENHAT_WEBSERVER_H

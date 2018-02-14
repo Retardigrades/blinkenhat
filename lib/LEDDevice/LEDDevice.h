@@ -5,10 +5,9 @@
 #ifndef BLINKENHAT_LEDDEVICE_H
 #define BLINKENHAT_LEDDEVICE_H
 
-#include <HatConfig.h>
 #include <EffectStack.h>
+#include <HatConfig.h>
 #include <LEDBand.h>
-
 
 class LEDDevice {
 public:
@@ -20,7 +19,8 @@ public:
   void loop(unsigned long time);
 
 private:
-  void recreateChannel(const Channel &channel, const HatConfig::ChannelCfg &ccfg);
+  void recreateChannel(const Channel &channel,
+                       const HatConfig::ChannelCfg &ccfg);
 
   uint8_t brightness;
   unsigned int frame_time;
@@ -31,4 +31,4 @@ private:
   EffectStack effects[2];
 };
 
-#endif //BLINKENHAT_LEDDEVICE_H
+#endif // BLINKENHAT_LEDDEVICE_H

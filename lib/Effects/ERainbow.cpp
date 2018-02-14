@@ -1,8 +1,6 @@
 #include "ERainbow.h"
 
-static void _rainbow(const CRGBSet &leds,
-                     uint8_t initialhue,
-                     uint8_t val) {
+static void _rainbow(const CRGBSet &leds, uint8_t initialhue, uint8_t val) {
   CHSV hsv;
   hsv.hue = initialhue;
   hsv.val = val;
@@ -14,7 +12,8 @@ static void _rainbow(const CRGBSet &leds,
 }
 
 void ERainbow::update(LEDBand &band, unsigned long time) {
-  uint8_t hue = uint8_t(255.0f * (float((time - start_time) % speed) / float(speed)));
+  uint8_t hue =
+      uint8_t(255.0f * (float((time - start_time) % speed) / float(speed)));
 
   if (apply_to & 0x01)
     _rainbow(band.upperLeds(), hue, value);
@@ -31,6 +30,4 @@ void ERainbow::config(const ConfigWrapper &cfg) {
   restart();
 }
 
-void ERainbow::restart() {
-  start_time = millis();
-}
+void ERainbow::restart() { start_time = millis(); }
