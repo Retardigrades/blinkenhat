@@ -26,6 +26,22 @@ $ clang-format -style=LLVM -i <filename>
 
 ## Releases
 
+### v0.6: Burning Bär release
+
+The first big improvement of the software gives you a clearer user Interface, the possibility to change effects and a new twinklng star effect.
+
+Mayor changes:
+* The userinterface is now more descriptive what the settings mean.
+* The AppBar with the save button is now always visible
+* Effects can now be removed
+* Effects can now be added
+* Effects can operate on a channel as one whole strip without dividing it
+* New effect: twinkling stars
+* The number of LEDs can now be set from 2 to 100
+* Documentation is growing (published at [blinkenhat.org](https://blinkenhat.org))
+* The visibility of the dot effect works now with other values than 100%
+
+
 ### v0.5: First public release
 
 This is basically the release that was distributed with the first version of the workshop.
