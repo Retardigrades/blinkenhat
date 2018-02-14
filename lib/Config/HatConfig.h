@@ -16,7 +16,9 @@ enum class Channel {
   B = 1
 };
 
-inline void forEachChannel(const std::function<void(const Channel &channel)> &cb) {
+using ChannelConsumer = std::function<void(const Channel &channel)>;
+
+inline void forEachChannel(const ChannelConsumer &cb) {
   cb(Channel::A);
   cb(Channel::B);
 }
@@ -54,8 +56,11 @@ public:
 
   class ChannelCfg : public ConfigWrapper {
   public:
+
+    using EffectConsumer = std::function<void(const EffectCfg &)>;
+
     ChannelCfg(JsonObject &root) : ConfigWrapper(&root) {}
-    ConfigWrapper for_each_fx(const std::function<void(const EffectCfg &)> &cb) const;
+    ConfigWrapper for_each_fx(const EffectConsumer &cb) const;
   };
 
   HatConfig();
