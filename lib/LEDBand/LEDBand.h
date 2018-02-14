@@ -3,6 +3,10 @@
 #define FASTLED_ESP8266_D1_PIN_ORDER
 #define FASTLED_ALLOW_INTERRUPTS 0
 
+#ifndef MAX_LEDS
+#define MAX_LEDS 100
+#endif
+
 #include <FastLED.h>
 #include <HatConfig.h>
 

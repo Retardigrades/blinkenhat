@@ -4,7 +4,7 @@
 
 #include "LEDDevice.h"
 
-static const uint8_t maxLEDs = 100;
+static const uint8_t maxLEDs = MAX_LEDS;
 static CRGBArray<maxLEDs*2> led_arr;
 
 void LEDDevice::setup() {

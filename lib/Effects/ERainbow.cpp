@@ -20,6 +20,8 @@ void ERainbow::update(LEDBand &band, unsigned long time) {
     _rainbow(band.upperLeds(), hue, value);
   if (apply_to & 0x02)
     _rainbow(band.lowerLeds(), hue, value);
+  if (apply_to == 0x04)
+    _rainbow(band.allLeds(), hue, value);
 }
 
 void ERainbow::config(const ConfigWrapper &cfg) {

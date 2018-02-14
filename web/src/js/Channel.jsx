@@ -26,7 +26,7 @@ const styles = theme => ({
 });
 
 
-const applyText = ["none", "upper", "lower", "both"];
+const applyText = ["none", "upper", "lower", "both", "as one strip"];
 
 
 function createDefault(effect, fxList) {
@@ -58,6 +58,52 @@ function createDefault(effect, fxList) {
       }
     };
   }
+  if (effect === "twinkle") {
+    return {
+      typ: "twinkle",
+      idx: new_idx,
+      cfg: {
+        count: 3,
+        speed: 2000,
+        fade: 500,
+        color_mode: 0,
+        hue: 0,
+        apply: 2,
+        coeff: 1.0
+      }
+    };
+  }
+}
+
+function TwinkleCfg(props) {
+  const color_modes = ["white", "unicolor", "dynamic color"];
+
+  return (
+    <div>
+      <SimpleSlider id="count" label="Number of twinkles" min={1} max={10} step={1} value={props.cfg.count}
+                    onChange={props.updater("count")}
+                    valueFormat={val => val}/>
+      <SimpleSlider id="speed" label="Avg. time between twinkles" min={100} max={6000} step={200} value={props.cfg.speed}
+                    onChange={props.updater("speed")}
+                    valueFormat={val => val / 1000.0 + "sek"}/>
+      <SimpleSlider id="fade" label="Length of fade-in/-out" min={100} max={2000} step={50} value={props.cfg.fade}
+                    onChange={props.updater("fade")}
+                    valueFormat={val => val / 1000.0 + "sek"}/>
+      <SimpleSlider id="color_mode" label="Color mode" min={0} max={2} step={1} value={props.cfg.color_mode}
+                    onChange={props.updater("color_mode")}
+                    valueFormat={val => color_modes[val]}/>
+      <SimpleSlider id="hue" label="Hue value for unicolor" min={0} max={255} step={1}
+                    value={props.cfg.hue}
+                    onChange={props.updater("hue")}
+                    valueFormat={val => val}/>
+      <SimpleSlider id="apply" label="Apply To" min={0} max={4} step={1} value={props.cfg.apply}
+                    onChange={props.updater("apply")}
+                    valueFormat={val => applyText[val]}/>
+      <SimpleSlider id="coeff" label="Visibility" min={0.1} max={1} step={0.1} value={props.cfg.coeff}
+                    onChange={props.updater("coeff")}
+                    valueFormat={val => val * 100 + "%"}/>
+    </div>
+  )
 }
 
 function DotCfg(props) {
@@ -79,7 +125,7 @@ function DotCfg(props) {
                     value={props.cfg.color_speed}
                     onChange={props.updater("color_speed")}
                     valueFormat={val => val / 1000.0 + "sek"}/>
-      <SimpleSlider id="apply" label="Apply To" min={0} max={3} step={1} value={props.cfg.apply}
+      <SimpleSlider id="apply" label="Apply To" min={0} max={4} step={1} value={props.cfg.apply}
                     onChange={props.updater("apply")}
                     valueFormat={val => applyText[val]}/>
       <SimpleSlider id="coeff" label="Visibility" min={0.1} max={1} step={0.1} value={props.cfg.coeff}
@@ -95,7 +141,7 @@ function RainbowCfg(props) {
       <SimpleSlider id="speed" label="Speed" min={600} max={6000} step={200} value={props.cfg.speed}
                     onChange={props.updater("speed")}
                     valueFormat={val => val / 1000.0 + "sek"}/>
-      <SimpleSlider id="apply" label="Apply to" min={0} max={3} step={1} value={props.cfg.apply}
+      <SimpleSlider id="apply" label="Apply to" min={0} max={4} step={1} value={props.cfg.apply}
                     onChange={props.updater("apply")}
                     valueFormat={val => applyText[val]}/>
       <SimpleSlider id="coeff" label="Visibility" min={0.1} max={1} step={0.1} value={props.cfg.coeff}
@@ -110,6 +156,7 @@ function Effect(props) {
     <PaperContainer headline={ "Effect: " + props.effect_data.typ} onRemove={props.deleter}>
       {props.effect_data.typ === 'rainbow' && <RainbowCfg updater={props.updater} cfg={props.effect_data.cfg}/>}
       {props.effect_data.typ === 'dot' && <DotCfg updater={props.updater} cfg={props.effect_data.cfg}/>}
+      {props.effect_data.typ === 'twinkle' && <TwinkleCfg updater={props.updater} cfg={props.effect_data.cfg}/>}
     </PaperContainer>
   )
 }
@@ -155,6 +202,7 @@ class AddMenu extends Component {
           onClose={() => this.handleClose()}
         >
           <MenuItem onClick={() => this.handleAdd("dot")}>Dot</MenuItem>
+          <MenuItem onClick={() => this.handleAdd("twinkle")}>twinkle</MenuItem>
           <MenuItem onClick={() => this.handleAdd("rainbow")}>Rainbow</MenuItem>
         </Menu>
       </div>
