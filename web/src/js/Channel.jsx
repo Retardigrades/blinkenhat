@@ -202,6 +202,7 @@ class AddMenu extends Component {
           onClose={() => this.handleClose()}
         >
           <MenuItem onClick={() => this.handleAdd("dot")}>Dot</MenuItem>
+          <MenuItem onClick={() => this.handleAdd("twinkle")}>twinkle</MenuItem>
           <MenuItem onClick={() => this.handleAdd("rainbow")}>Rainbow</MenuItem>
         </Menu>
       </div>
