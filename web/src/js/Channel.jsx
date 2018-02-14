@@ -58,6 +58,21 @@ function createDefault(effect, fxList) {
       }
     };
   }
+  if (effect === "twinkle") {
+    return {
+      typ: "twinkle",
+      idx: new_idx,
+      cfg: {
+        count: 3,
+        speed: 2000,
+        fade: 500,
+        color_mode: 0,
+        hue: 0,
+        apply: 2,
+        coeff: 1.0
+      }
+    };
+  }
 }
 
 function DotCfg(props) {
