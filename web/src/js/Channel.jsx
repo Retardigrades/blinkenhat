@@ -75,6 +75,37 @@ function createDefault(effect, fxList) {
   }
 }
 
+function TwinkleCfg(props) {
+  const color_modes = ["white", "unicolor", "dynamic color"];
+
+  return (
+    <div>
+      <SimpleSlider id="count" label="Number of twinkles" min={1} max={10} step={1} value={props.cfg.count}
+                    onChange={props.updater("count")}
+                    valueFormat={val => val}/>
+      <SimpleSlider id="speed" label="Avg. time between twinkles" min={100} max={6000} step={200} value={props.cfg.speed}
+                    onChange={props.updater("speed")}
+                    valueFormat={val => val / 1000.0 + "sek"}/>
+      <SimpleSlider id="fade" label="Length of fade-in/-out" min={100} max={2000} step={50} value={props.cfg.fade}
+                    onChange={props.updater("fade")}
+                    valueFormat={val => val / 1000.0 + "sek"}/>
+      <SimpleSlider id="color_mode" label="Color mode" min={0} max={2} step={1} value={props.cfg.color_mode}
+                    onChange={props.updater("color_mode")}
+                    valueFormat={val => color_modes[val]}/>
+      <SimpleSlider id="hue" label="Hue value for unicolor" min={0} max={255} step={1}
+                    value={props.cfg.hue}
+                    onChange={props.updater("hue")}
+                    valueFormat={val => val}/>
+      <SimpleSlider id="apply" label="Apply To" min={0} max={4} step={1} value={props.cfg.apply}
+                    onChange={props.updater("apply")}
+                    valueFormat={val => applyText[val]}/>
+      <SimpleSlider id="coeff" label="Visibility" min={0.1} max={1} step={0.1} value={props.cfg.coeff}
+                    onChange={props.updater("coeff")}
+                    valueFormat={val => val * 100 + "%"}/>
+    </div>
+  )
+}
+
 function DotCfg(props) {
   return (
     <div>
