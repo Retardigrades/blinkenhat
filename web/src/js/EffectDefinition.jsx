@@ -29,8 +29,18 @@ function speedSlider(label, min, max, step, dflt) {
 }
 
 
+function HueVal(props) {
+
+  const hue = Math.round((props.val / 255.0) * 360);
+  const style = {color: "hsl(" + hue + ", 100%, 60%)", fontSize: "1.5em"};
+  return (
+    <span>
+      <span style={style}>&#x25C9;</span> hue: {props.val}&deg;
+    </span>);
+}
+
 function hueSlider(label) {
-  return makeSlider(label, 0, 255, 1, 0, val => "hue: " + val);
+  return makeSlider(label, 0, 255, 1, 0, val => (<HueVal val={val}/>));
 }
 
 export const effects = {
