@@ -26,7 +26,7 @@ $ clang-format -style=LLVM -i <filename>
 
 ## Releases
 
-### v0.6: Burning Bär release
+### [v0.6: Burning Bär release](https://github.com/Retardigrades/blinkenhat/releases/tag/v0.6)
 
 The first big improvement of the software gives you a clearer user Interface, the possibility to change effects and a new twinklng star effect.
 
@@ -42,6 +42,6 @@ Mayor changes:
 * The visibility of the dot effect works now with other values than 100%
 
 
-### v0.5: First public release
+### [v0.5: First public release](https://github.com/Retardigrades/blinkenhat/releases/tag/v0.5)
 
 This is basically the release that was distributed with the first version of the workshop.
