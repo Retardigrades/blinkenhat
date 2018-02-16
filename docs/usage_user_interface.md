@@ -121,6 +121,7 @@ The dots can change their colors as they move.
   The length of the tail a sibgle dot pulls behind itself.
 * **Start color:**
   This is the color the dit starts with at the beginning of the effect.
+  The dot below the slider shows a preview of the currently selected color.
 * **Color change speed:**
   The time in seconds t needs to make a full cycle on the colorspace.
   If you set this value to zero the color will not change at all.
@@ -163,6 +164,7 @@ The stars can be white, a defined color or a random color on every flash.
   * Dynamic color - every star has a different random color each time it appears.
 * **Color for unicolor mode**
   This definies which color should be used in unicolor mode.
+  The dot below the slider shows a preview of the currently selected color.
 * **ApplyTo:**
   This defines to which part of the strip of LEDs the effect gets applied.
   The possible values are:
