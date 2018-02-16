@@ -152,3 +152,9 @@ $ NODE_ENV="production" npm run build
 
 This generates the compiled `index.html` in `web/dist`.
 The platformio build process will compress this file and converts it to a C-header (`lib/WebServer/index.h`) that get included in the firmware build.
+
+The result should look like this when you tap the add menu:
+![Add effect](images/dev_create_effect_add_example.png)
+
+And like this when its added:
+![Effect config](images/dev_create_effect_config_example.png)
