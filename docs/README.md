@@ -23,6 +23,10 @@ In this section we provide all the so-far available documentation of the device 
 2. Software
 3. User Interface
 
+There are also special topics like:
+* [Use the build system](dev_build_system)
+* [Create your own effect](dev_create_effect)
+
 ## Build your own BlinkenHat
 
 You did not attend one of the workshops but wnat to build your own LED cloth using a BlinkenHat device?
