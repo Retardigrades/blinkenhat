@@ -13,7 +13,8 @@ The whole project is open source and completely available on [Github](https://gi
 
 ## User documentation
 
-To be filled ...
+There are several parts of the usage to describe:
+1. [User Interface](usage_user_interface)
 
 ## Project documentation
 
