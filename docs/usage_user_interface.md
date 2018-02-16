@@ -26,6 +26,7 @@ Now you see the default view of the user interface:
 
 ![User Interface start](images/usage_user_interface_start.png)
 
+**NOTE:** Your smartphone will no be able to access the internet while connected to teh Hotspot of the BlinkenHat.
 
 ## Menu
 
@@ -172,3 +173,67 @@ The stars can be white, a defined color or a random color on every flash.
   * Apply to all Leds as one long strip - Uses all LEDs as one strip and do no separation or copying at all.
 * **Visibility:**
   This defines how much the effect shall be visible on the LED strip.
+
+
+## General Configuration
+
+This contains configuration that apples to all channels.
+
+![General channel settings](images/usage_user_interface_general.png)
+
+* **Brightness:**
+  Set the overall brightness of the LEDs.
+* **Framerate:**
+  This tells how often the LEDs are updated per second.
+
+
+## Wifi Configuration
+
+There are two modes for WiFi: *Station* and *AcessPoint*.
+
+### Station mode
+
+In station mode the device tries to connect as normal WiFi station to a configured wifi.
+Use this when you are at home.
+You can also use it with you smartphone when you enable a mobile hotspot at your phone.
+This has the advantage that you'restill able to use the mobile internet on your phone while having the BlinkenHat connected.
+
+**NOTE:** If you use the station mode you cannot use any random adress in the browser to get the user interface.
+You need to find the IP address your router or smartphone assigned to the device.
+
+**NOTE:** The device will try to connect to the configured WiFi for a few seconds at boot time.
+If it fals to connect for any reason it starts the AP mode.
+
+![General channel settings](images/usage_user_interface_wifi_sta.png)
+
+* **Station SSID:**
+  The name of the WiFi to connect to.
+* **Station password:**
+  The password of the Wifi to connect to.
+
+
+### AP mode settings
+
+In AccessPoint mode the device opens its own hotspot you can connect to with your smartphone.
+
+**NOTE:** Your smartphone will no be able to access the internet while connected to teh Hotspot of the BlinkenHat.
+
+![General channel settings](images/usage_user_interface_wifi_ap.png)
+
+* **AP SSID:**
+  The first part of the name of the hotspot.
+  The device-id will be appended to this name.
+* **AP password:**
+  The password of the hotspot.
+
+
+## Upgrade
+
+To upgrade the device:
+1. Download the latest release of the firmware from the [GitHub release page](https://github.com/Retardigrades/blinkenhat/releases) to your smartphone.
+   The firmware is the file that is called `firmware.bin`.
+2. Connect to the BlinkenHat.
+3. Go to the upgrade page.
+4. Select the file on your smartphone.
+5. Click *Submit*.
+6. Wait (and hope ;) ).
