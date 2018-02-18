@@ -36,3 +36,7 @@ Everything you need to know can be found on the [Build your own](build) page.
 ## Run your own workshop
 
 To be filled ...
+
+----
+
+{% include newsletter.html %}
