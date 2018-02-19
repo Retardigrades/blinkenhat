@@ -39,7 +39,10 @@ Everything you need to know can be found on the [Build your own](build) page.
 
 ## Run your own workshop
 
-To be filled ...
+We're happy to support you running your own workshop based on this project.
+To give you something to start with we wrote our experience down here:
+* [Prepare your workshop](workshop_preparation)
+* [Run your workshop](workshop_running)
 
 ----
 
