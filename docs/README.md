@@ -13,6 +13,7 @@ The whole project is open source and completely available on [Github](https://gi
 
 There are several parts of the usage to describe:
 1. [User Interface](usage_user_interface)
+2. [LED channels](usage_led_channels)
 
 ## Project documentation
 
