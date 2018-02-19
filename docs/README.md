@@ -44,6 +44,3 @@ To be filled ...
 
 {% include newsletter.html %}
 
-----
-
-[Imprint](imprint)
