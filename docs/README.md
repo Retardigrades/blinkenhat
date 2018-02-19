@@ -1,3 +1,5 @@
+# The BlinkenHat
+
 ## Introduction
 
 The blinkenhat is a little project to enable interrested people with little or less experience in electronics or programming into this field.
