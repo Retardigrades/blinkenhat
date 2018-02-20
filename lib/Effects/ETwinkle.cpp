@@ -24,7 +24,7 @@ void ETwinkle::update(LEDBand &band, unsigned long time) {
 
     // Already faded out
     if (elapsed > (speed + show_time)) {
-      resetLight(light, time, leds);
+      resetLight(light, time, std::max(leds, int(count)));
       continue;
     }
 
