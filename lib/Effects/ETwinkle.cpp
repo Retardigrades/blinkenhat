@@ -24,7 +24,7 @@ void ETwinkle::update(LEDBand &band, unsigned long time) {
 
     // Already faded out
     if (elapsed > (speed + show_time)) {
-      resetLight(light, time, leds);
+      resetLight(light, time, std::max(leds, int(count)));
       continue;
     }
 
@@ -74,7 +74,7 @@ void ETwinkle::restart() {
 
   for (int idx = 0; idx < count; ++idx) {
     lights.emplace_front(new Light());
-    resetLight(*(lights.front()), now - (idx * offset), MAX_LEDS);
+    resetLight(*(lights.front()), now - (idx * offset), count);
   }
 }
 

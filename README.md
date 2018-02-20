@@ -26,6 +26,19 @@ $ clang-format -style=LLVM -i <filename>
 
 ## Releases
 
+
+### [v0.7: Big Wifi Release](https://github.com/Retardigrades/blinkenhat/releases/tag/v0.7)
+
+This release finally makes the WiFi much more stable and useable.
+
+Major changes:
+* Select the WiFi channel with the least networks.
+* Double the CPU speed to 160MHz.
+* Drop unnecessary blocking after LED write.
+* Fix some glitches in the twinkle effect.
+* Add a lot of documentation.
+
+
 ### [v0.6: Burning Bär release](https://github.com/Retardigrades/blinkenhat/releases/tag/v0.6)
 
 The first big improvement of the software gives you a clearer user Interface, the possibility to change effects and a new twinklng star effect.

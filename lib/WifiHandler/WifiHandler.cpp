@@ -1,5 +1,6 @@
 #include <ESP8266WiFi.h>
 #include <user_interface.h>
+#include <array>
 
 #include "WifiHandler.h"
 
@@ -16,6 +17,16 @@ void WifiHandler::configure(const HatConfig &cfg) {
 
   timeout = dcfg.getOption(F("ap_timeout"), 0U);
 }
+
+
+struct ChannelStat {
+  int8_t channel;
+  uint8_t count;
+
+  ChannelStat(uint8_t channel) : channel(channel), count(0) {}
+  bool operator<(const ChannelStat& other) { return count < other.count; }
+};
+
 
 bool WifiHandler::connect() {
   last_client = millis();
@@ -35,10 +46,56 @@ bool WifiHandler::connect() {
   }
 
   if (ap_ssid.length() > 0 && ap_passwd.length() > 0) {
+
+    int channel = 1;
+
+    uint8_t scan_results = 0;
+
+#ifdef DEBUG_ESP_WIFI
+    Serial.println("Scan for Wifis");
+#endif
+    // find channel with min networks.
+    if ((scan_results = WiFi.scanNetworks()) > 0) {
+
+#ifdef DEBUG_ESP_WIFI
+      Serial.printf(" .. %d wifis found.\n", scan_results);
+#endif
+
+      std::array<ChannelStat, 4> stats{{1, 5, 9, 13}};
+      for (uint8_t idx = 0; idx < scan_results; ++idx) {
+        int current = WiFi.channel(idx);
+        for (auto& stat : stats) {
+          if ((stat.channel - 2) < current && (stat.channel + 2) >= current) {
+#ifdef DEBUG_ESP_WIFI
+            Serial.printf(" -> Network on channel %02d - count to channel %02d.\n", current, stat.channel);
+#endif
+            stat.count ++;
+            break;
+          }
+        }
+      }
+
+      const auto& minCh = std::min_element(stats.begin(), stats.end());
+      channel = minCh->channel;
+
+#ifdef DEBUG_ESP_WIFI
+      Serial.println("Channel stats:");
+      for (const auto& stat : stats) {
+        Serial.printf("  %02d: %d\n", stat.channel, stat.count);
+      }
+      Serial.printf("Selected channel: %d\n", channel);
+#endif
+    } else {
+#ifdef DEBUG_ESP_WIFI
+      Serial.println(" .. NO wifis found, using channel 1");
+#endif
+    }
+
     WiFi.mode(WIFI_AP);
 
     WiFi.softAP((ap_ssid + String(ESP.getChipId(), HEX)).c_str(),
-                ap_passwd.c_str());
+                ap_passwd.c_str(),
+                channel);
 
     delay(500);
     Serial.println(WiFi.softAPIP());
