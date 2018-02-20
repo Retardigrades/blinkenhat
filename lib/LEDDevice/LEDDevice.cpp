@@ -71,6 +71,5 @@ void LEDDevice::loop(unsigned long time) {
 
     yield();
     FastLED.show();
-    delayMicroseconds(50);
   }
 }
