@@ -83,7 +83,7 @@ bool WifiHandler::connect() {
       for (const auto& stat : stats) {
         Serial.printf("  %02d: %d\n", stat.channel, stat.count);
       }
-      Serial.printf("Selected channel: %d", channel);
+      Serial.printf("Selected channel: %d\n", channel);
 #endif
     } else {
 #ifdef DEBUG_ESP_WIFI
