@@ -74,7 +74,7 @@ void ETwinkle::restart() {
 
   for (int idx = 0; idx < count; ++idx) {
     lights.emplace_front(new Light());
-    resetLight(*(lights.front()), now - (idx * offset), MAX_LEDS);
+    resetLight(*(lights.front()), now - (idx * offset), count);
   }
 }
 
