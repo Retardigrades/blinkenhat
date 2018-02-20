@@ -20,7 +20,7 @@ void WifiHandler::configure(const HatConfig &cfg) {
 
 
 struct ChannelStat {
-  uint8_t channel;
+  int8_t channel;
   uint8_t count;
 
   ChannelStat(uint8_t channel) : channel(channel), count(0) {}
@@ -51,14 +51,24 @@ bool WifiHandler::connect() {
 
     uint8_t scan_results = 0;
 
+#ifdef DEBUG_ESP_WIFI
+    Serial.println("Scan for Wifis");
+#endif
     // find channel with min networks.
     if ((scan_results = WiFi.scanNetworks()) > 0) {
+
+#ifdef DEBUG_ESP_WIFI
+      Serial.printf(" .. %d wifis found.\n", scan_results);
+#endif
 
       std::array<ChannelStat, 4> stats{{1, 5, 9, 13}};
       for (uint8_t idx = 0; idx < scan_results; ++idx) {
         int current = WiFi.channel(idx);
         for (auto& stat : stats) {
-          if (stat.channel == current) {
+          if ((stat.channel - 2) < current && (stat.channel + 2) >= current) {
+#ifdef DEBUG_ESP_WIFI
+            Serial.printf(" -> Network on channel %02d - count to channel %02d.\n", current, stat.channel);
+#endif
             stat.count ++;
             break;
           }
@@ -74,6 +84,10 @@ bool WifiHandler::connect() {
         Serial.printf("  %02d: %d\n", stat.channel, stat.count);
       }
       Serial.printf("Selected channel: %d", channel);
+#endif
+    } else {
+#ifdef DEBUG_ESP_WIFI
+      Serial.println(" .. NO wifis found, using channel 1");
 #endif
     }
 
