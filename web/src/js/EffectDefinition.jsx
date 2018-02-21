@@ -70,7 +70,7 @@ export const effects = {
       count: makeSlider("Number of stars", 1, 15, 1, 3, val => val + " stars"),
       speed: speedSlider("Avg. time between twinkles", 50, 5000, 50, 2000),
       fade: speedSlider("Time to fade in/out", 50, 2000, 50, 500),
-      color_mode: makeSlider("Color mode", 0, 3, 1, 0, val => colorModeText[val]),
+      color_mode: makeSlider("Color mode", 0, 2, 1, 0, val => colorModeText[val]),
       hue: hueSlider("Color for unicolor mode"),
       apply: applySlider(),
       coeff: visibleSlider()
